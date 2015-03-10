@@ -10,10 +10,6 @@ go:
 
 before_install:
   - git submodule update --init --recursive
-  - sudo apt-get -y update
-  - mkdir -p ./mygo
-  - export GOPATH=$PROJECT_ROOT/mygo
-  - export PATH=$PATH:$GOPATH/mygo/bin:/usr/local/go/bin
   - go get github.com/hashicorp/atlas-upload-cli
   - cd $GOPATH/src/github.com/hashicorp/atlas-upload-cli/
 
@@ -23,7 +19,7 @@ install:
 
 
 before_script:
-    - atlas-upload-cli -h
+    - atlas-upload -h
     - cd $PROJECT_ROOT/app/
 
 
