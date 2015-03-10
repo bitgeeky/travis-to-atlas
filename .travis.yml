@@ -5,6 +5,7 @@ env:
 
 
 before_install:
+    - sudo apt-get -y update
     - echo "Update packages and configuration."
 
 install:
@@ -18,12 +19,10 @@ before_script:
 script:
     - echo "Run Tests Here"
 
-language: go
-go:
-  - tip
 
 after_success:
     - echo "Build Successful"
+    - sudo apt-get -y install golang
     - mkdir -p $PROJECT_ROOT/mygo
     - export GOPATH=$PROJECT_ROOT/mygo
     - go get github.com/hashicorp/atlas-upload-cli
