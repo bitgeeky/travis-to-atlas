@@ -1,0 +1,39 @@
+env:
+    global:
+        - PROJECT_ROOT=`pwd`
+        - secure: "XbO6qScVisfU4rdnEHOFgGpuTyiRxxlbUOFnK0x4Pu5oMjasth42ysW3WU4GnIhra1wxUmWFydBfdhpRTE6YUuzdHNclF2IzW7RGB/+agNkGkYX6sAXMVCszXh9Ue8D+lc/LCcErH0D+cqZO+rbpQPEBiTuyklUxyVdnqH9/A4g="
+
+language: go
+
+go:
+  - tip
+
+before_install:
+  - git submodule update --init --recursive
+  - sudo apt-get -y update
+  - mkdir -p ./mygo
+  - export GOPATH=$PROJECT_ROOT/mygo
+  - export PATH=$PATH:$GOPATH/mygo/bin:/usr/local/go/bin
+  - go get github.com/hashicorp/atlas-upload-cli
+  - cd $GOPATH/src/github.com/hashicorp/atlas-upload-cli/
+
+
+install:
+    - go install
+
+
+before_script:
+    - atlas-upload-cli -h
+    - cd $PROJECT_ROOT/app/
+
+
+script:
+    - echo "Run Tests Here"
+    - echo $ATLAS_TOKEN
+
+after_success:
+    - echo "Build Successful"
+
+branches:
+    only:
+        - master
