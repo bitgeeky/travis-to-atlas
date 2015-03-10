@@ -22,16 +22,16 @@ install:
 
 
 before_script:
-    - ./bin/atlas-upload -h
-    - cd $PROJECT_ROOT/app/
+    - cd $PROJECT_ROOT/tests/
 
 
 script:
     - echo "Run Tests Here"
-    - echo $ATLAS_TOKEN
 
 after_success:
     - echo "Build Successful"
+    - cd $GOPATH/src/github.com/hashicorp/atlas-upload-cli/
+    - ./bin/atlas-upload bitgeeky/simple $PROJECT_ROOT/app
 
 branches:
     only:
