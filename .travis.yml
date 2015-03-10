@@ -19,7 +19,7 @@ install:
 
 
 before_script:
-    - atlas-upload -h
+    - atlas-upload-cli -h
     - cd $PROJECT_ROOT/app/
 
 
