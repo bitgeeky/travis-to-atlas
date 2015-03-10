@@ -9,9 +9,12 @@ go:
   - tip
 
 before_install:
-  - git submodule update --init --recursive
+  - echo $PROJECT_ROOT
+  - mkdir -p $PROJECT_ROOT/mygo
+  - export GOPATH=$PROJECT_ROOT/mygo
   - go get github.com/hashicorp/atlas-upload-cli
   - cd $GOPATH/src/github.com/hashicorp/atlas-upload-cli/
+  - make
 
 
 install:
@@ -19,7 +22,7 @@ install:
 
 
 before_script:
-    - atlas-upload-cli -h
+    - ./bin/atlas-upload -h
     - cd $PROJECT_ROOT/app/
 
 
